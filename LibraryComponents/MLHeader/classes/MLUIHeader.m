@@ -13,7 +13,7 @@ static NSString *const kMLHeaderControllerTitleKey = @"title";
 static NSString *const kMLHeaderControllerHeaderBoundsKey = @"bounds";
 
 @interface MLUIHeader ()
-@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet UIView *statusBarView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *statusBarViewHeight;
 
@@ -37,6 +37,8 @@ static NSString *const kMLHeaderControllerHeaderBoundsKey = @"bounds";
 
 @property (nonatomic, assign) CGFloat statusbarHeight;
 @property (nonatomic, assign) CGFloat navigationBarHeight;
+
+@property (nonatomic, assign) BOOL navBarColorIsChanged;
 
 @end
 
@@ -83,38 +85,6 @@ static NSString *const kMLHeaderControllerHeaderBoundsKey = @"bounds";
 {
 	[super didMoveToParentViewController:parent];
 
-	[self.view.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.view.superview
-	                                                                attribute:NSLayoutAttributeTop
-	                                                                relatedBy:NSLayoutRelationEqual
-	                                                                   toItem:self.view
-	                                                                attribute:NSLayoutAttributeTop
-	                                                               multiplier:1.0
-	                                                                 constant:0.0]];
-
-	[self.view.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.view.superview
-	                                                                attribute:NSLayoutAttributeLeading
-	                                                                relatedBy:NSLayoutRelationEqual
-	                                                                   toItem:self.view
-	                                                                attribute:NSLayoutAttributeLeading
-	                                                               multiplier:1.0
-	                                                                 constant:0.0]];
-
-	[self.view.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.view.superview
-	                                                                attribute:NSLayoutAttributeBottom
-	                                                                relatedBy:NSLayoutRelationEqual
-	                                                                   toItem:self.view
-	                                                                attribute:NSLayoutAttributeBottom
-	                                                               multiplier:1.0
-	                                                                 constant:0.0]];
-
-	[self.view.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.view.superview
-	                                                                attribute:NSLayoutAttributeTrailing
-	                                                                relatedBy:NSLayoutRelationEqual
-	                                                                   toItem:self.view
-	                                                                attribute:NSLayoutAttributeTrailing
-	                                                               multiplier:1.0
-	                                                                 constant:0.0]];
-
 	// Get Statusbar and NavigationBar height
 	self.statusbarHeight = CGRectGetHeight(UIApplication.sharedApplication.statusBarFrame);
 	self.navigationBarHeight = parent.navigationController.navigationBar.frame.size.height;
@@ -142,7 +112,9 @@ static NSString *const kMLHeaderControllerHeaderBoundsKey = @"bounds";
 	[self.view bringSubviewToFront:self.statusBarView];
 
 	// Set default backgroundColor
-	self.navigationBarBackgroundcolor = [[MLStyleSheetManager styleSheet] primaryColor];
+	if (!self.navBarColorIsChanged) {
+		self.navigationBarBackgroundcolor = [[MLStyleSheetManager styleSheet] primaryColor];
+	}
 }
 
 - (void)askDelegateForConfig
@@ -424,11 +396,33 @@ static NSString *const kMLHeaderControllerHeaderBoundsKey = @"bounds";
         self.delegate.title = @"";
         self.titleHidden = YES;
 	}
+
+    if (self.titleHidden) {
+        self.delegate.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+	} else if (self.hasShadow) {
+        UIImage *shadowImage = [[UIImage alloc] init];
+
+        CGColorSpaceRef colourSpace = CGColorSpaceCreateDeviceRGB();
+        CGContextRef shadowContext = CGBitmapContextCreate(NULL, shadowImage.size.width + 20, shadowImage.size.height + 20, CGImageGetBitsPerComponent(shadowImage.CGImage), 0, colourSpace, kCGImageAlphaPremultipliedLast);
+        CGColorSpaceRelease(colourSpace);
+
+        CGContextSetShadowWithColor(shadowContext, CGSizeMake(10, -10), 10, [UIColor blackColor].CGColor);
+        CGContextDrawImage(shadowContext, CGRectMake(0, 20, shadowImage.size.width, shadowImage.size.height), shadowImage.CGImage);
+
+        CGImageRef shadowedCGImage = CGBitmapContextCreateImage(shadowContext);
+        CGContextRelease(shadowContext);
+
+        UIImage *shadowedImage = [UIImage imageWithCGImage:shadowedCGImage];
+        CGImageRelease(shadowedCGImage);
+
+        self.delegate.navigationController.navigationBar.shadowImage = shadowedImage;
+	}
 }
 
 - (void)setNavigationBarBackgroundcolor:(UIColor *)navigationBarBackgroundcolor
 {
     _navigationBarBackgroundcolor = navigationBarBackgroundcolor;
+    _navBarColorIsChanged = YES;
 
     UIColor *oldColor = self.delegate.navigationController.navigationBar.backgroundColor;
     CGFloat alpha = CGColorGetAlpha([oldColor CGColor]);

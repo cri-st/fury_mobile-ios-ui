@@ -8,8 +8,10 @@
 
 #import "MLModalViewController.h"
 #import <MLUI/MLButton.h>
+#import <MLUI/MLFullscreenModal.h>
 #import <MLUI/MLModal.h>
 #import "MLModalInnerViewController.h"
+#import "MLFullscreenModalInnerViewController.h"
 
 @interface MLModalViewController ()
 @property (weak, nonatomic) IBOutlet MLButton *plainModal;
@@ -17,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet MLButton *modalWithButtons;
 @property (strong, nonatomic) UIView *viewWithConstraints;
 @property (weak, nonatomic) IBOutlet MLButton *modalMP;
+@property (weak, nonatomic) IBOutlet MLButton *modalFullscreen;
 
 @end
 
@@ -31,6 +34,7 @@
 	self.modalWithTitle.buttonTitle = @"Modal with Title";
 	self.modalWithButtons.buttonTitle = @"Modal with Title and button";
 	self.modalMP.buttonTitle = @"Modal MP";
+	self.modalFullscreen.buttonTitle = @"Modal Fullscreen";
 }
 
 #pragma mark - Action
@@ -54,6 +58,11 @@
 - (IBAction)showModalMP:(id)sender
 {
 	[MLModal showModalWithViewController:[[MLModalInnerViewController alloc] init] title:@"Title" actionTitle:nil actionBlock:nil secondaryActionTitle:nil secondaryActionBlock:nil dismissBlock:nil enableScroll:YES];
+}
+
+- (IBAction)showModalFullscreen:(id)sender {
+	[self.navigationController pushViewController:[[MLFullscreenModal alloc] initWithViewController:[[MLFullscreenModalInnerViewController alloc] init] title:@"Modificar envío" enableScroll:YES] animated:YES];
+//    [self.navigationController pushViewController:[[MLFullscreenModalInnerViewController alloc] init] animated:YES];
 }
 
 @end
