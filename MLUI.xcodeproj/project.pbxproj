@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0AF7A37C4754AF0730AF5407 /* Pods_MLUIUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424B92398C21CFBAA7A2FF7F /* Pods_MLUIUnitTests.framework */; };
+		2C0E9DD32241103900FAA1FD /* MLFullscreenModalInnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0E9DD12241103900FAA1FD /* MLFullscreenModalInnerViewController.m */; };
+		2C0E9DD42241103900FAA1FD /* MLFullscreenModalInnerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0E9DD22241103900FAA1FD /* MLFullscreenModalInnerViewController.xib */; };
 		3B4689321A6D7F9700F2F4A5 /* MLUIActionButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4689291A6D7F9700F2F4A5 /* MLUIActionButtonViewController.m */; };
 		3B4689351A6D7F9700F2F4A5 /* PriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4689301A6D7F9700F2F4A5 /* PriceViewController.m */; };
 		3B4689361A6D7F9700F2F4A5 /* PriceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4689311A6D7F9700F2F4A5 /* PriceViewController.xib */; };
@@ -103,6 +105,9 @@
 
 /* Begin PBXFileReference section */
 		1DAEE9511E2429E9008647FB /* MLUIAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MLUIAssets.bundle; path = MLFonts/MLUIAssets.bundle; sourceTree = "<group>"; };
+		2C0E9DD02241103900FAA1FD /* MLFullscreenModalInnerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLFullscreenModalInnerViewController.h; path = MLFullscreenModal/MLFullscreenModalInnerViewController.h; sourceTree = "<group>"; };
+		2C0E9DD12241103900FAA1FD /* MLFullscreenModalInnerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLFullscreenModalInnerViewController.m; path = MLFullscreenModal/MLFullscreenModalInnerViewController.m; sourceTree = "<group>"; };
+		2C0E9DD22241103900FAA1FD /* MLFullscreenModalInnerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MLFullscreenModalInnerViewController.xib; path = MLFullscreenModal/MLFullscreenModalInnerViewController.xib; sourceTree = "<group>"; };
 		3B4689281A6D7F9700F2F4A5 /* MLUIActionButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLUIActionButtonViewController.h; sourceTree = "<group>"; };
 		3B4689291A6D7F9700F2F4A5 /* MLUIActionButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLUIActionButtonViewController.m; sourceTree = "<group>"; };
 		3B46892F1A6D7F9700F2F4A5 /* PriceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceViewController.h; sourceTree = "<group>"; };
@@ -332,6 +337,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C0E9DCF22410FFC00FAA1FD /* MLFullscreenModal */ = {
+			isa = PBXGroup;
+			children = (
+				2C0E9DD02241103900FAA1FD /* MLFullscreenModalInnerViewController.h */,
+				2C0E9DD12241103900FAA1FD /* MLFullscreenModalInnerViewController.m */,
+				2C0E9DD22241103900FAA1FD /* MLFullscreenModalInnerViewController.xib */,
+			);
+			name = MLFullscreenModal;
+			sourceTree = "<group>";
+		};
 		3B4689271A6D7F9700F2F4A5 /* ActionButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -1026,6 +1041,7 @@
 				4DB11C001C45425000570E2F /* MLFonts */,
 				C081796A1CDD1D4A0024BECC /* MLContextualMenu */,
 				8EAF22021D2D51B20005F1F1 /* MLHtml */,
+				2C0E9DCF22410FFC00FAA1FD /* MLFullscreenModal */,
 				4D18549E1C8DCC8F00676993 /* MLModal */,
 				4D89066F1C80A41C00BD0EEE /* MLSnackbar */,
 				4DC88F0D1D46608300570845 /* MLStyle */,
@@ -1410,6 +1426,7 @@
 				4D1B1D7E1CA9C0F1003571C1 /* MLWidgetsViewController.xib in Resources */,
 				4D8906741C80A46700BD0EEE /* MLSnackbarViewController.xib in Resources */,
 				3B4689361A6D7F9700F2F4A5 /* PriceViewController.xib in Resources */,
+				2C0E9DD42241103900FAA1FD /* MLFullscreenModalInnerViewController.xib in Resources */,
 				4DFD2CBC1C440F760093CAE5 /* MainViewController.xib in Resources */,
 				A470E05F1B6934A200B0E9FD /* MLUIActionButtonInXibViewController.xib in Resources */,
 			);
@@ -1513,6 +1530,7 @@
 				BB5CF3AB20240FF5006484D8 /* MLStyleSheetViewController.m in Sources */,
 				4DFD2CC61C4418510093CAE5 /* MLColorPaletteViewController.m in Sources */,
 				4DB11C031C4542A700570E2F /* MLFontsViewController.m in Sources */,
+				2C0E9DD32241103900FAA1FD /* MLFullscreenModalInnerViewController.m in Sources */,
 				A470E0621B69442000B0E9FD /* MLUIActionButtonInXibViewController.m in Sources */,
 				6A4459421D22DABF0069EFBC /* MLBooleanWidgetViewController.m in Sources */,
 				4D8906731C80A46700BD0EEE /* MLSnackbarViewController.m in Sources */,
